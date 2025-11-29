@@ -3,6 +3,7 @@ import { SmartReceiptDemo } from './SmartReceiptDemo';
 import { Settings as SettingsComponent } from './Settings';
 import { OnboardingWizard } from './OnboardingWizard';
 import { PaymentPage } from './PaymentPage';
+import { DocumentViewer } from './DocumentViewer';
 import { User as UserType, Document, DocumentType, DocumentStatus, STORAGE_KEYS } from '../types';
 import { FileText, Plus, Settings, Clock, Receipt, DollarSign, CheckCircle, Send, XCircle, Sparkles } from 'lucide-react';
 
@@ -20,6 +21,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUserUpda
   const [showSettings, setShowSettings] = useState(false);
   const [showOnboarding, setShowOnboarding] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
+  const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
   const [currentUser, setCurrentUser] = useState(user);
 
   // Check if user is Pro and hasn't completed onboarding
@@ -238,7 +240,11 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUserUpda
                     <div className="space-y-1 max-h-[400px] overflow-y-auto">
                         {filteredDocuments.length > 0 ? (
                           filteredDocuments.slice(0, 10).map((doc) => (
-                             <div key={doc.id} className="px-4 py-3 text-sm text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer border-b border-slate-100 last:border-0">
+                             <div
+                               key={doc.id}
+                               onClick={() => setSelectedDocument(doc)}
+                               className="px-4 py-3 text-sm text-slate-600 hover:bg-slate-100 rounded-lg cursor-pointer border-b border-slate-100 last:border-0 transition-colors"
+                             >
                                 <div className="flex items-center justify-between mb-1">
                                   <span className="font-medium text-slate-900">{doc.clientName}</span>
                                   <span className="text-xs text-slate-400">
@@ -311,6 +317,14 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUserUpda
             setShowPayment(false);
             setShowOnboarding(true); // Show onboarding after upgrade
           }}
+        />
+      )}
+
+      {/* Document Viewer - For viewing saved documents */}
+      {selectedDocument && (
+        <DocumentViewer
+          document={selectedDocument}
+          onClose={() => setSelectedDocument(null)}
         />
       )}
     </div>
