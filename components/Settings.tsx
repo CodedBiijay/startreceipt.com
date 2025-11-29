@@ -79,9 +79,26 @@ export const Settings: React.FC<SettingsProps> = ({ user, onSave, onClose, onUpg
    * Save settings to localStorage and update parent
    */
   const handleSave = () => {
+    // For basic/demo users: save business info but not custom branding (logo, colors)
+    // For Pro users: save everything including logo and custom colors
+    const brandingToSave: BrandingConfig = isPro
+      ? branding // Pro: save everything
+      : {
+          // Basic/demo: save business info but use default colors and no logo
+          businessName: branding.businessName,
+          businessEmail: branding.businessEmail,
+          businessPhone: branding.businessPhone,
+          businessAddress: branding.businessAddress,
+          taxId: branding.taxId,
+          tagline: branding.tagline,
+          logo: '', // No logo for non-Pro users
+          primaryColor: '#0f172a', // Default color
+          secondaryColor: '#EBF1FF', // Default color
+        };
+
     const updatedUser: User = {
       ...user,
-      branding: isPro ? branding : undefined, // Only save branding for Pro users
+      branding: brandingToSave,
     };
 
     // Save to localStorage
