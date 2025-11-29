@@ -596,15 +596,13 @@ Generated with StartReceipt.com`;
                       className="bg-transparent border-none text-white font-semibold p-0 w-full focus:ring-0 placeholder-white placeholder-opacity-40 text-lg mb-1"
                       placeholder="Client Name"
                     />
-                    {documentType === 'invoice' && (
-                      <input
-                        type="email"
-                        value={clientEmail}
-                        onChange={(e) => setClientEmail(e.target.value)}
-                        className="bg-transparent border-none text-white text-opacity-80 p-0 w-full focus:ring-0 placeholder-white placeholder-opacity-30 text-sm"
-                        placeholder="client@email.com"
-                      />
-                    )}
+                    <input
+                      type="email"
+                      value={clientEmail}
+                      onChange={(e) => setClientEmail(e.target.value)}
+                      className="bg-transparent border-none text-white text-opacity-80 p-0 w-full focus:ring-0 placeholder-white placeholder-opacity-30 text-sm"
+                      placeholder="client@email.com"
+                    />
                   </div>
                 </div>
               </div>
@@ -768,8 +766,8 @@ Generated with StartReceipt.com`;
                     className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg font-semibold text-sm hover:bg-green-700 transition-colors"
                    >
                      <Mail size={16} />
-                     <span className="hidden sm:inline">Send Email</span>
-                     <span className="sm:inline md:hidden">Email</span>
+                     <span className="hidden sm:inline">Send {documentType === 'invoice' ? 'Invoice' : 'Receipt'}</span>
+                     <span className="sm:inline md:hidden">{documentType === 'invoice' ? 'Invoice' : 'Receipt'}</span>
                    </button>
                    <button
                     type="button"
