@@ -285,6 +285,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user, onLogout, onUserUpda
           user={currentUser}
           onSave={handleUserUpdate}
           onClose={() => setShowSettings(false)}
+          onUpgrade={() => setShowPayment(true)}
         />
       )}
 

@@ -6,9 +6,10 @@ interface SettingsProps {
   user: User;
   onSave: (updatedUser: User) => void;
   onClose: () => void;
+  onUpgrade?: () => void; // Callback to open payment page
 }
 
-export const Settings: React.FC<SettingsProps> = ({ user, onSave, onClose }) => {
+export const Settings: React.FC<SettingsProps> = ({ user, onSave, onClose, onUpgrade }) => {
   const isPro = user.tier === 'pro';
 
   // Initialize branding state with defaults
@@ -21,6 +22,7 @@ export const Settings: React.FC<SettingsProps> = ({ user, onSave, onClose }) => 
     logo: user.branding?.logo || '',
     primaryColor: user.branding?.primaryColor || '#2257F5',
     secondaryColor: user.branding?.secondaryColor || '#EBF1FF',
+    tagline: user.branding?.tagline || '',
   });
 
   const [logoError, setLogoError] = useState<string>('');
@@ -190,6 +192,22 @@ export const Settings: React.FC<SettingsProps> = ({ user, onSave, onClose }) => 
                     className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Business Tagline or Mission (Optional)
+                  </label>
+                  <textarea
+                    value={branding.tagline}
+                    onChange={(e) => setBranding({ ...branding, tagline: e.target.value })}
+                    placeholder="E.g., 'Quality service you can trust' or 'Building tomorrow's solutions today'"
+                    rows={2}
+                    className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent resize-none"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    This will appear on your receipts and invoices to showcase your brand
+                  </p>
+                </div>
               </div>
             </section>
 
@@ -232,8 +250,16 @@ export const Settings: React.FC<SettingsProps> = ({ user, onSave, onClose }) => 
                           Priority support
                         </li>
                       </ul>
-                      <button className="w-full bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-dark transition-colors">
-                        Upgrade to Pro - $19/month
+                      <button
+                        onClick={() => {
+                          if (onUpgrade) {
+                            onClose(); // Close settings first
+                            onUpgrade(); // Open payment modal
+                          }
+                        }}
+                        className="w-full bg-brand-blue text-white px-6 py-3 rounded-lg font-semibold hover:bg-brand-dark transition-colors"
+                      >
+                        Upgrade to Pro - $9.99/month
                       </button>
                     </div>
                   </div>
