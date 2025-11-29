@@ -406,21 +406,29 @@ Generated with StartReceipt.com`;
           <div className={`w-full ${isAppMode ? 'xl:w-1/3' : 'lg:w-1/2'} space-y-6`}>
             <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
               <label className="block text-sm font-semibold text-slate-700 mb-2">
-                Describe the job or items sold
+                Describe your work - Include description, quantity, and price
               </label>
+              <div className="mb-3 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-xs text-slate-700 font-medium mb-1">💡 What to include:</p>
+                <ul className="text-xs text-slate-600 space-y-1">
+                  <li>• <strong>Description:</strong> What you did or sold</li>
+                  <li>• <strong>Quantity:</strong> Hours worked, items sold, units delivered</li>
+                  <li>• <strong>Price:</strong> Rate per hour or cost per item</li>
+                </ul>
+              </div>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="E.g., I painted the kitchen for 5 hours at $40/hr and bought 3 cans of paint for $25 each."
+                placeholder="Example: 'Painted 2 bedrooms at $150 per room. Installed ceiling fan for $200. Bought 5 gallons of paint at $35 each.'"
                 className="w-full h-40 p-4 rounded-xl border border-slate-200 focus:ring-2 focus:ring-brand-blue focus:border-transparent outline-none resize-none text-slate-900 bg-white"
               />
               <div className="mt-4 flex flex-col gap-3">
                 <button
                   type="button"
-                  onClick={() => setDescription("Fixed leaky faucet (2 hours @ $85/hr) and replaced valve ($15).")}
+                  onClick={() => setDescription("Fixed leaky faucet - 2 hours at $85 per hour. Replaced valve - 1 unit at $15.")}
                   className="text-sm bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg text-slate-700 font-medium transition-colors"
                 >
-                  ✨ Try an example →
+                  ✨ Try an example (with quantity & price) →
                 </button>
                 <button
                   type="button"
