@@ -3,7 +3,7 @@ import { ReceiptItem } from "../types";
 import { usageTracker } from "./usageTracker";
 import { rateLimiter } from "./rateLimiter";
 
-const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
 if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
   console.error("⚠️ Gemini API key is not configured. Please add your API key to .env.local");
