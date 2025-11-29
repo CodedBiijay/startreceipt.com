@@ -536,17 +536,23 @@ Generated with StartReceipt.com`;
                 }}
               >
                 <div className="flex justify-between items-start mb-6">
-                  {/* Logo (if Pro user has uploaded one) */}
-                  {user?.branding?.logo && (
-                    <img
-                      src={user.branding.logo}
-                      alt={user.branding.businessName}
-                      className="h-16 object-contain bg-white rounded p-1"
-                    />
-                  )}
+                  {/* Logo or Business Name */}
+                  <div className="flex-1">
+                    {user?.branding?.logo ? (
+                      <img
+                        src={user.branding.logo}
+                        alt={user.branding.businessName}
+                        className="h-16 object-contain bg-white rounded p-1"
+                      />
+                    ) : user?.branding?.businessName ? (
+                      <div className="bg-white bg-opacity-20 backdrop-blur-sm rounded-lg px-4 py-2 inline-block">
+                        <p className="font-bold text-xl text-white">{user.branding.businessName}</p>
+                      </div>
+                    ) : null}
+                  </div>
 
                   {/* Document type and number */}
-                  <div className={`${user?.branding?.logo ? '' : 'w-full'} text-right`}>
+                  <div className="text-right">
                     <div className="font-bold text-2xl tracking-tight">
                       {documentType === 'receipt' ? 'RECEIPT' : 'INVOICE'}
                     </div>
@@ -570,6 +576,9 @@ Generated with StartReceipt.com`;
                     <p className="font-semibold text-lg">
                       {user?.branding?.businessName || 'Your Business'}
                     </p>
+                    {user?.branding?.tagline && (
+                      <p className="text-white text-opacity-70 text-xs italic mt-1 mb-2">{user.branding.tagline}</p>
+                    )}
                     {user?.branding?.businessEmail && (
                       <p className="text-white text-opacity-80 text-sm">{user.branding.businessEmail}</p>
                     )}

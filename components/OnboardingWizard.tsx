@@ -19,6 +19,7 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ user, onComp
     logo: user.branding?.logo || '',
     primaryColor: user.branding?.primaryColor || '#2257F5',
     secondaryColor: user.branding?.secondaryColor || '#EBF1FF',
+    tagline: user.branding?.tagline || '',
   });
   const [logoError, setLogoError] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -195,6 +196,22 @@ export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ user, onComp
                     rows={2}
                     className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent resize-none"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">
+                    Business Tagline or Mission (Optional)
+                  </label>
+                  <textarea
+                    value={branding.tagline}
+                    onChange={(e) => setBranding({ ...branding, tagline: e.target.value })}
+                    placeholder="E.g., 'Quality service you can trust' or 'Building tomorrow's solutions today'"
+                    rows={2}
+                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-blue focus:border-transparent resize-none"
+                  />
+                  <p className="text-xs text-slate-500 mt-1">
+                    This will appear on your receipts and invoices to showcase your brand
+                  </p>
                 </div>
               </div>
             </div>

@@ -7,7 +7,17 @@
       "Bash(killall node:*)",
       "WebSearch",
       "Bash(find:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: Full-featured invoice and receipt generator\n\nComplete implementation with all Week 1-4 features:\n\n## Core Features\n- AI-powered receipt/invoice generation using Google Gemini\n- Professional PDF export with custom branding\n- Document type toggle (receipts vs invoices)\n- Invoice status tracking (Draft/Sent/Paid/Overdue)\n- Tax calculation and payment terms\n- Client management and document history\n\n## Pro Features\n- Custom logo upload and brand colors\n- Business information on all documents\n- Onboarding wizard for new Pro users\n- Unlimited AI generations\n\n## Technical Stack\n- React 19.2.0 + TypeScript 5.8.2\n- Vite for blazing fast development\n- Tailwind CSS for responsive design\n- Google Gemini AI integration\n- Local-first data storage (localStorage)\n\n## Mobile & Polish\n- Fully responsive across all device sizes\n- Mobile-optimized button layouts and navigation\n- Cross-browser compatible (Chrome, Firefox, Safari)\n- Updated FAQ and pricing pages\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(brew install:*)",
+      "Bash(gh auth login:*)",
+      "Bash(gh repo create:*)",
+      "Bash(npm i:*)",
+      "Bash(vercel login)",
+      "Bash(vercel:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

@@ -281,7 +281,7 @@ const App: React.FC = () => {
                 <div className="bg-slate-900 p-8 rounded-3xl shadow-xl border border-slate-800 relative overflow-hidden">
                     <div className="absolute top-0 right-0 bg-brand-blue text-white text-xs font-bold px-3 py-1 rounded-bl-xl">POPULAR</div>
                     <h3 className="text-xl font-bold text-white mb-2">Pro</h3>
-                    <div className="text-4xl font-bold text-white mb-6">$12<span className="text-lg text-slate-400 font-normal">/mo</span></div>
+                    <div className="text-4xl font-bold text-white mb-6">$9.99<span className="text-lg text-slate-400 font-normal">/mo</span></div>
                     <ul className="space-y-4 mb-8">
                         <li className="flex items-center gap-3 text-slate-300"><Check size={18} className="text-brand-blue"/> Everything in Basic</li>
                         <li className="flex items-center gap-3 text-slate-300"><Check size={18} className="text-brand-blue"/> Unlimited AI Generations</li>
@@ -302,7 +302,7 @@ const App: React.FC = () => {
                   <h3 className="font-bold text-slate-900 mb-2 text-lg">Try Risk-Free</h3>
                   <p className="text-slate-700 mb-4">
                     Start with our free plan. No credit card required. If you upgrade to Pro and don't save at least
-                    an hour of admin time in your first month, we'll refund your $12—no questions asked.
+                    an hour of admin time in your first month, we'll refund your $9.99—no questions asked.
                   </p>
                   <div className="flex flex-wrap gap-4 text-sm text-slate-600">
                     <span className="flex items-center gap-1">

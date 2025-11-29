@@ -55,6 +55,7 @@ export interface BrandingConfig {
   primaryColor: string; // hex color
   secondaryColor: string; // hex color
   fontFamily?: string; // optional custom font
+  tagline?: string; // Business slogan/mission/vision
 }
 
 export enum PricingTier {
