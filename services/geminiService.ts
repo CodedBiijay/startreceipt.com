@@ -5,6 +5,13 @@ import { rateLimiter } from "./rateLimiter";
 
 const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
+console.log("🔑 API Key check:", {
+  exists: !!apiKey,
+  length: apiKey?.length,
+  firstChars: apiKey?.substring(0, 10),
+  env: import.meta.env.MODE
+});
+
 if (!apiKey || apiKey === 'PLACEHOLDER_API_KEY') {
   console.error("⚠️ Gemini API key is not configured. Please add your API key to .env.local");
 }
