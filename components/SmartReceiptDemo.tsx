@@ -431,7 +431,7 @@ Generated with StartReceipt.com`;
                   }`}
                 >
                   {loading ? <Loader2 className="animate-spin" size={20} /> : <Sparkles size={20} />}
-                  {loading ? 'Generating...' : 'Generate Receipt'}
+                  {loading ? 'Generating...' : `Generate ${documentType === 'invoice' ? 'Invoice' : 'Receipt'}`}
                 </button>
               </div>
             </div>
@@ -752,7 +752,7 @@ Generated with StartReceipt.com`;
                           }`}
                        >
                           {isSaved ? <Check size={16} /> : <Save size={16} />}
-                          {isSaved ? 'Saved!' : 'Save Receipt'}
+                          {isSaved ? 'Saved!' : `Save ${documentType === 'invoice' ? 'Invoice' : 'Receipt'}`}
                        </button>
                      )}
                    </div>
