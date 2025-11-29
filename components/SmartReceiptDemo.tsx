@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { parseReceiptDescription } from '../services/geminiService';
 import { ReceiptItem, DocumentType, Document, DocumentStatus, STORAGE_KEYS, User } from '../types';
-import { Sparkles, Loader2, RefreshCw, Save, Check, Download, FileText, Receipt, Send, CheckCircle } from 'lucide-react';
+import { Sparkles, Loader2, RefreshCw, Save, Check, Download, FileText, Receipt, Send, CheckCircle, Mail } from 'lucide-react';
 import html2canvas from 'html2canvas';
 import { jsPDF } from 'jspdf';
 
@@ -283,6 +283,35 @@ export const SmartReceiptDemo: React.FC<SmartReceiptDemoProps> = ({
       alert(`Failed to generate PDF: ${error instanceof Error ? error.message : 'Unknown error'}. Trying print dialog...`);
       window.print();
     }
+  };
+
+  const handleSendEmail = () => {
+    if (!clientEmail) {
+      alert('Please enter a client email address to send the document.');
+      return;
+    }
+
+    const subject = `${documentType === 'invoice' ? 'Invoice' : 'Receipt'} from ${clientName || 'StartReceipt'}`;
+    const body = `Hi,
+
+Please find attached your ${documentType} with the following details:
+
+${items.map((item, i) => `${i + 1}. ${item.description} - ${item.quantity} x $${item.price.toFixed(2)} = $${(item.quantity * item.price).toFixed(2)}`).join('\n')}
+
+Subtotal: $${calculateSubtotal().toFixed(2)}
+${taxRate > 0 ? `Tax (${taxRate}%): $${calculateTaxAmount().toFixed(2)}\n` : ''}Total: $${calculateTotal().toFixed(2)}
+
+${documentType === 'invoice' && dueDate ? `\nDue Date: ${new Date(dueDate).toLocaleDateString()}` : ''}
+${documentType === 'invoice' && paymentTerms ? `Payment Terms: ${paymentTerms.replace('-', ' ').toUpperCase()}` : ''}
+${notes ? `\nNotes: ${notes}` : ''}
+
+Thank you for your business!
+
+---
+Generated with StartReceipt.com`;
+
+    const mailtoLink = `mailto:${clientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
   };
 
   const calculateSubtotal = () => {
@@ -732,14 +761,26 @@ export const SmartReceiptDemo: React.FC<SmartReceiptDemoProps> = ({
                  ) : (
                    <div></div>
                  )}
-                 <button
-                  type="button"
-                  onClick={handleDownload}
-                  className="flex items-center justify-center gap-2 text-brand-blue font-semibold text-sm hover:underline hover:text-brand-dark transition-colors py-2"
-                 >
-                   <Download size={16} />
-                   Download PDF
-                 </button>
+                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                   <button
+                    type="button"
+                    onClick={handleSendEmail}
+                    className="flex items-center justify-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg font-semibold text-sm hover:bg-green-700 transition-colors"
+                   >
+                     <Mail size={16} />
+                     <span className="hidden sm:inline">Send Email</span>
+                     <span className="sm:inline md:hidden">Email</span>
+                   </button>
+                   <button
+                    type="button"
+                    onClick={handleDownload}
+                    className="flex items-center justify-center gap-2 px-4 py-2 border-2 border-brand-blue text-brand-blue rounded-lg font-semibold text-sm hover:bg-brand-blue hover:text-white transition-colors"
+                   >
+                     <Download size={16} />
+                     <span className="hidden sm:inline">Download PDF</span>
+                     <span className="sm:inline md:hidden">PDF</span>
+                   </button>
+                 </div>
               </div>
             </div>
           </div>
